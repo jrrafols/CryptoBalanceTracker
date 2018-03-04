@@ -1,20 +1,48 @@
 <htmL>
     <head>
+        <title>Cryptocurrency Balance Tracker</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         <script src='./Scripts/CryptoBalanceTracker.js'></script>
         <script src='./Scripts/CryptoPortfolio.js'></script>
     </head>
     <body>
         <div id="app">
-            <ul>
-                <li v-for="entry in portfolio">
-                    {{ entry.amount }} {{ entry.symbol }} (in {{ entry.exchange }}) 
-                    @{{ entry.price.toFixed(2) }} = ${{ entry.total.toFixed(2) }} USD
-                    / {{ entry.total_btc.toFixed(7) }} BTC
-                </li>
-            </ul>
-            <div><b>Total: ${{ total.toFixed(2) }} USD</b></div>
-            <div><b>Total: {{ total_btc.toFixed(7) }} BTC</b></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Currency</th>
+                        <th scope="col">Units</th>
+                        <th scope="col">Exchange</th>                
+                        <th scope="col">Current Price (USD)</th>
+                        <th scope="col">Total (USD)</th>
+                        <th scope="col">CurrentPrice (BTC)</th>
+                        <th scope="col">Total (BTC)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="entry in portfolio">
+                        <td>{{ entry.name }} ({{ entry.symbol }})</td>
+                        <td>{{ entry.amount }}</td>
+                        <td>{{ entry.exchange }}</td>
+                        <td>${{ entry.price > 1 ? entry.price.toFixed(2) :entry.price.toFixed(4) }}</td>
+                        <td>${{ entry.total.toFixed(2) }}</td>
+                        <td>{{ entry.price_btc.toFixed(7) }}</td>
+                        <td>{{ entry.total_btc.toFixed(7) }}</td>
+                    </tr>
+                    <tr style="font-weight:bold">
+                        <td>Totals</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>${{ total.toFixed(2) }}</td>
+                        <td></td>
+                        <td>{{ total_btc.toFixed(7) }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <script src='./Scripts/balances.js'></script>

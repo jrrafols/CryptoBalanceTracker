@@ -6,12 +6,14 @@
             if (coinInfo) {
                 var coinPriceUSD = +coinInfo["price_usd"];
                 var coinPriceBTC = +coinInfo["price_btc"];
+                item.name = coinInfo.name;
                 item.price = coinPriceUSD;
                 item.price_btc = coinPriceBTC;
                 item.total = item.amount * coinPriceUSD;
                 item.total_btc = item.amount * coinPriceBTC;
             }
             else {
+                item.name = "Invalid Symbol"
                 item.price = 0;
                 item.total = 0;
                 item.price_btc = 0;
